@@ -65,7 +65,7 @@ export class WebSocketMessagingAdaptor {
           (response: MessageEvent): Data => {
             return <Data>JSON.parse(response.data);
           }
-        ));;
+        ));
         console.log("connected");
         resolve(observable);
       }).catch(reason => {

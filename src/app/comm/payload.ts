@@ -44,14 +44,15 @@ export class SubscriptionMessage {
 
 export class SupplyMessage {
 
-  // BATCH_BEGIN = 1;    
-  // BATCH_END = 2;    
-  // ADD = 3;    
-  // UPDATE = 4;    
-  // DELETE = 5;    
+  public static readonly BATCH_BEGIN = 1;    
+  public static readonly BATCH_END = 2;    
+  public static readonly ADD = 3;    
+  public static readonly UPDATE = 4;    
+  public static readonly DELETE = 5;    
 
   phase: number;
   supply: string;
+  topic: string;
 
   //Todo : add support for limited fields subscription
 }
