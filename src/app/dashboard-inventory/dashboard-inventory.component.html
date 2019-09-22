@@ -1,32 +1,58 @@
-<mat-grid-list cols="1" rowHeight="50%">
-    <mat-grid-tile
-        [colspan]="1"
-        [rowspan]="1"
-        >
-      <app-products-summary>
-  
-      </app-products-summary>
-    </mat-grid-tile>
-    <mat-grid-tile
-        [colspan]="1"
-        [rowspan]="1"
-        >
-        <mat-tab-group style="height: 100%; width: 100%">
-          <mat-tab label="Products Availability">
-            <ng-template matTabContent>
-              <app-products-available></app-products-available>
-            </ng-template>
-          </mat-tab>
-          <mat-tab label="Purchace Details">
-            <ng-template matTabContent>
-              <app-purchase-history></app-purchase-history>
-            </ng-template>
-          </mat-tab>
-          <mat-tab label="Consumption Details">
-            <ng-template matTabContent>
-              <app-products-consume></app-products-consume>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div>
+    <mat-toolbar style="height: 5vh" color="primary">
+        <div fxShow="true" fxHide.gt-sm="true">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+
+        <a mat-button class="companyName" routerLink="/">
+            <span>Nikhil Thermoplast</span>
+        </a>
+        <span class="example-spacer"></span>
+        <div fxShow="true" fxHide.lt-md="true">
+            <a mat-button (click)="onAddPurchase()">New Purchase</a>           
+        </div>
+
+    </mat-toolbar>
+    <mat-sidenav-container fxFlexFill class="example-container">
+
+        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"
+        fixedInViewport="true" opened="false" fxHide.gt-sm="true">
+            <div fxLayout="column">
+                <a mat-button onclick="onAddPurchase">New Purchase</a>
+                
+            </div>
+        </mat-sidenav>
+        <mat-sidenav-content style="height: 95vh; overflow: hidden;">
+           
+                <mat-grid-list cols="1" rowHeight="50%">
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <app-products-summary>
+
+                        </app-products-summary>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-tab-group style="height: 100%; width: 100%">
+                            <mat-tab label="Products Availability">
+                                <ng-template matTabContent>
+                                    <app-products-available></app-products-available>
+                                </ng-template>
+                            </mat-tab>
+                            <mat-tab label="Purchace Details">
+                                <ng-template matTabContent>
+                                    <app-purchase-history></app-purchase-history>
+                                </ng-template>
+                            </mat-tab>
+                            <mat-tab label="Consumption Details">
+                                <ng-template matTabContent>
+                                    <app-products-consume></app-products-consume>
+                                </ng-template>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-grid-tile>
+                </mat-grid-list>
+           
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

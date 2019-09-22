@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatTabsModule} from '@angular/material/tabs';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
 import {
   MatCardModule,
   MatInputModule,
@@ -9,7 +11,11 @@ import {
   MatProgressSpinnerModule,
   MatSortModule,
   MatTableModule,
-  MatTableDataSource
+  MatTableDataSource,
+  MatDialogModule,
+  MatIconModule, 
+  MatSidenavModule,
+  MatToolbarModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,6 +27,7 @@ import { ProductsAvailableComponent } from './products-available/products-availa
 import { LoginComponent } from './login/login.component';
 import { DashboardInventoryComponent } from './dashboard-inventory/dashboard-inventory.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { AddPurchaseComponent } from './add-purchase/add-purchase.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +37,8 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
     ProductsAvailableComponent,
     PurchaseHistoryComponent,
     LoginComponent,
-    DashboardInventoryComponent
+    DashboardInventoryComponent,
+    AddPurchaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,9 +51,16 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
+    MatDialogModule, MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
     FormsModule,
-    ReactiveFormsModule  
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
+
+  entryComponents: [AddPurchaseComponent],
+
   providers: [],
   bootstrap: [AppComponent]
 })
