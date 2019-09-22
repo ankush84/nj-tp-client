@@ -1,0 +1,32 @@
+<mat-grid-list cols="1" rowHeight="50%">
+    <mat-grid-tile
+        [colspan]="1"
+        [rowspan]="1"
+        >
+      <app-products-summary>
+  
+      </app-products-summary>
+    </mat-grid-tile>
+    <mat-grid-tile
+        [colspan]="1"
+        [rowspan]="1"
+        >
+        <mat-tab-group style="height: 100%; width: 100%">
+          <mat-tab label="Products Availability">
+            <ng-template matTabContent>
+              <app-products-available></app-products-available>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Purchace Details">
+            <ng-template matTabContent>
+              <app-products-purchase></app-products-purchase>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Consumption Details">
+            <ng-template matTabContent>
+              <app-products-consume></app-products-consume>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+    </mat-grid-tile>
+  </mat-grid-list>

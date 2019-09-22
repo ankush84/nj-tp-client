@@ -1,42 +1,33 @@
-import { Component } from '@angular/core';
-import { WebsocketService } from "./web-socket.service";
-import { MessageService } from "./message.service";
+import { Component, Input } from '@angular/core';
+import { CommService } from './comm/comm.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less'],
-  providers: [WebsocketService, MessageService]
+  providers: []
 })
 export class AppComponent {
   title = 'nj-tp-app';
 
-  constructor(private messageService: MessageService) {
-    messageService.messages.subscribe(msg => {
-      console.log("Response from websocket: " + msg);
-    });
-    let t=this;
-    setTimeout(()=>{
-      console.log("timeout");
-      t.sendMsg()},5000
-    );
+  @Input()
+  showLogin: boolean;  
+  @Input()
+  showDashboard: boolean;
 
-   // this.sendMsg();
+  constructor(private commService:CommService) {
+   
+    commService.start().then(res => {
+      if (res) {
+        this.showLogin = true;        
+      }
+    });
+
+    
   }
 
-  private message ={
-  "operation": 1,
-  "user": {
-    "username": "bob",
-    "password": "654321"
-  },
-  message:null,
-  session:null
-}
-
-  sendMsg() {
-    console.log("new message from client to websocket: ", this.message);
-    this.messageService.messages.next(this.message);
-    //this.message.message = "";
+  onLoginResult(result:boolean):void{
+    this.showLogin=!result;
+    this.showDashboard=result;
   }
 }
