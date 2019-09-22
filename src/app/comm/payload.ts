@@ -7,6 +7,7 @@ export class Data {
   public static readonly OPERATION_SUBSCRIBE = 100;
   public static readonly OPERATION_SUPPLY = 200;
   public static readonly OPERATION_REQUEST = 300;
+  public static readonly OPERATION_REPLY = 400;
 
   protocolversion: number;
   operation: number;

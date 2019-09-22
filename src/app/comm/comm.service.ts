@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Deferred, WebSocketMessagingAdaptor } from './web-socket.service';
-import { Data, User, SubscriptionMessage, SupplyMessage } from './payload';
-import { ThrowStmt } from '@angular/compiler';
-import { Observable, Observer } from 'rxjs';
+import { Data, User, SubscriptionMessage, SupplyMessage, ReplyMessage, RequestMessage } from './payload';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +13,9 @@ export class CommService {
   private loginSesionData: Data;
 
   private subscriptions: { [topic: string]: Subscription[] } = {};
+  private requestCounter: number = 0;
+  private pendingRequests: { [id: number]: Deferred<ReplyMessage> }={};
+
 
   public static readonly URL = "ws://192.168.1.10:9080/messaging";
 
@@ -46,12 +48,14 @@ export class CommService {
               }
 
               break;
-            // case Data.OPERATION_REQUEST:
-            // if (!isValidSession(data.sessionId))
-            //     break;
-            // RequestMessage rm = gson.fromJson(data.message, RequestMessage.class);
-            // RequestService.getInstance().getReply(this, rm);
-            // break;
+            case Data.OPERATION_REPLY:
+              if (!data.sessionId) break;
+
+              let reply = <ReplyMessage>JSON.parse(data.message);
+              if (this.pendingRequests[reply.id]) {
+                this.pendingRequests[reply.id].resolve(reply);
+              }
+              break;
             default:
             // getSession().close(404, "Wrong operation");
           }
@@ -118,6 +122,38 @@ export class CommService {
     throw new Error("Method not implemented.");
   }
 
+
+  request(name: string, args: { [name: string]: any }): Promise<ReplyMessage> {
+    if (!this.loginSesionData) throw new Error("Not logged in");
+
+    if (!this.ws.isConnected()) throw new Error("Not connected to server");
+
+
+    let data = new Data();
+    data.operation = Data.OPERATION_REQUEST;
+    data.user = this.loginSesionData.user;
+    data.sessionId = this.loginSesionData.sessionId;
+    let requestMessage = new RequestMessage();
+    requestMessage.name = name;
+    requestMessage.argNames = [];
+    requestMessage.argValues = [];
+    requestMessage.id = this.requestCounter++;
+
+    for (const name in args) {
+      const value = args[name];
+      requestMessage.argNames.push(name);
+      requestMessage.argValues.push(value);
+
+    }
+
+    data.message = JSON.stringify(requestMessage);
+    this.ws.send(data);
+    let def = new Deferred<ReplyMessage>();
+
+    this.pendingRequests[requestMessage.id] = def;
+    return def.promise;
+
+  }
 
 
 }
