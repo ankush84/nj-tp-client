@@ -119,7 +119,24 @@ export class CommService {
   }
 
   unsubscribe(sub: Subscription) {
-    throw new Error("Method not implemented.");
+
+    if (!this.loginSesionData) throw new Error("Not logged in");
+
+    if (!this.ws.isConnected()) throw new Error("Not connected to server");
+
+
+    let data = new Data();
+    data.operation = Data.OPERATION_UNSUBSCRIBE;
+    data.user = this.loginSesionData.user;
+    data.sessionId = this.loginSesionData.sessionId;
+    let subMs = new SubscriptionMessage();
+    subMs.topic = sub.topic;
+
+    data.message = JSON.stringify(subMs);
+    this.ws.send(data);    
+
+    if (this.subscriptions[sub.topic]) this.subscriptions[sub.topic] = [];   
+
   }
 
 
@@ -168,13 +185,13 @@ export class Subscription implements ISubscription {
   supplies: Observable<String>;
 
 
-  constructor(private _topic: String,
+  constructor(private _topic: string,
     public onSupply: (suply: SupplyMessage) => void,
     private commService: CommService) {
 
   }
 
-  public get topic(): String {
+  public get topic(): string {
     return this._topic;
   }
 

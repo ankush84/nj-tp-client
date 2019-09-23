@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { CommService } from '../comm/comm.service';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { CommService, ISubscription } from '../comm/comm.service';
 import { SupplyMessage } from '../comm/payload';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
@@ -8,8 +8,8 @@ import { MatTableDataSource, MatSort } from '@angular/material';
   templateUrl: './purchase-history.component.html',
   styleUrls: ['./purchase-history.component.less']
 })
-export class PurchaseHistoryComponent implements OnInit {
-
+export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
+ 
   @Input()
   displayedColumns = ['date', 'billNo', 'productName', 'price', 'qty', 'details'];
 
@@ -19,6 +19,7 @@ export class PurchaseHistoryComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   purchaseData: PurchaseSupply[] = [];
+  purchaseSubscription: ISubscription;
 
   constructor(private commService: CommService,
     private changeDetectorRefs: ChangeDetectorRef) {
@@ -29,7 +30,7 @@ export class PurchaseHistoryComponent implements OnInit {
   private beginCount: number = 0;
 
   ngOnInit() {
-    this.commService.subscribe("Purchase", (supply) => {
+   this.purchaseSubscription =  this.commService.subscribe("Purchase", (supply) => {
 
       switch (supply.phase) {
         case SupplyMessage.BATCH_BEGIN: this.beginCount++; break;
@@ -52,6 +53,10 @@ export class PurchaseHistoryComponent implements OnInit {
       }
 
     });
+  }
+
+  ngOnDestroy(): void {
+    this.purchaseSubscription.dispose();
   }
 
   private refreshDataSource() {

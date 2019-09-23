@@ -5,6 +5,7 @@ export class Data {
   public static readonly OPERATION_LOGOUT = 3;
   public static readonly OPERATION_LOGOUT_RESULT = 4;
   public static readonly OPERATION_SUBSCRIBE = 100;
+  public static readonly OPERATION_UNSUBSCRIBE = 101;
   public static readonly OPERATION_SUPPLY = 200;
   public static readonly OPERATION_REQUEST = 300;
   public static readonly OPERATION_REPLY = 400;
