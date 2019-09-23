@@ -7,12 +7,12 @@
   
     <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
-        <mat-cell class="duration-cell" *matCellDef="let purchase">{{purchase.date}}</mat-cell>
+        <mat-cell class="date-cell" *matCellDef="let purchase">{{purchase.date}}</mat-cell>
     </ng-container>
     
-    <ng-container matColumnDef="billNo">
+    <ng-container matColumnDef="billingId">
         <mat-header-cell *matHeaderCellDef mat-sort-header>#Bill</mat-header-cell>
-        <mat-cell class="duration-cell" *matCellDef="let purchase">{{purchase.billingId}}</mat-cell>
+        <mat-cell class="billing-cell" *matCellDef="let purchase">{{purchase.billingId}}</mat-cell>
     </ng-container>
    
     <ng-container matColumnDef="productName">
@@ -22,20 +22,20 @@
   
     <ng-container matColumnDef="price">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
-        <mat-cell class="description-cell"
+        <mat-cell class="price-cell"
                   *matCellDef="let purchase">{{purchase.price}}</mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="qty">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</mat-header-cell>
-        <mat-cell class="duration-cell" *matCellDef="let purchase">{{purchase.qty}}</mat-cell>
+        <mat-cell class="qty-cell" *matCellDef="let purchase">{{purchase.qty}}</mat-cell>
     </ng-container>
    
     
 
     <ng-container matColumnDef="details">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Details</mat-header-cell>
-        <mat-cell class="duration-cell" *matCellDef="let purchase">{{purchase.details}}</mat-cell>
+        <mat-cell class="details-cell" *matCellDef="let purchase">{{purchase.details}}</mat-cell>
     </ng-container>
    
    

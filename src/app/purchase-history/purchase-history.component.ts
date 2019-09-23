@@ -11,7 +11,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
  
   @Input()
-  displayedColumns = ['date', 'billNo', 'productName', 'price', 'qty', 'details'];
+  displayedColumns = ['date', 'billingId', 'productName', 'price', 'qty', 'details'];
 
   @Input()
   dataSource: MatTableDataSource<PurchaseSupply>;
@@ -62,6 +62,10 @@ export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
   private refreshDataSource() {
     if (this.beginCount === 0) {
       this.dataSource = new MatTableDataSource(this.purchaseData);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+      });
+
     }
   }
 
