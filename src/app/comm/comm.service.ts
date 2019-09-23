@@ -17,7 +17,7 @@ export class CommService {
   private pendingRequests: { [id: number]: Deferred<ReplyMessage> }={};
 
 
-  public static readonly URL = "ws://192.168.1.10:9080/messaging";
+  public static readonly URL = "ws://iondelws792:9080/messaging";
 
   public start(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {

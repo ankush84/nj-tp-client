@@ -28,9 +28,9 @@ export class PurchaseHistoryComponent implements OnInit {
   ngOnInit() {
     this.commService.subscribe("Purchase", (supply) => {
 
-      let purchase = <PurchaseSupply>JSON.parse(supply.supply);
       switch (supply.phase) {
         case SupplyMessage.ADD:
+          let purchase = <PurchaseSupply>JSON.parse(supply.supply);
           (<any>purchase).date = new Date(purchase.timestamp);
           //purchase.timestamp=new Date(purchase.timestamp);
           this.purchaseData.push(purchase);
