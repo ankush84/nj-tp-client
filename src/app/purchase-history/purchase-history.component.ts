@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { CommService, ISubscription } from '../comm/comm.service';
 import { SupplyMessage } from '../comm/payload';
 import { MatTableDataSource, MatSort } from '@angular/material';
@@ -20,14 +20,13 @@ export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
 
   purchaseData: PurchaseSupply[] = [];
   purchaseSubscription: ISubscription;
+  private beginCount: number = 0;
 
-  constructor(private commService: CommService,
-    private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(private commService: CommService) {
 
     this.dataSource = new MatTableDataSource(this.purchaseData);
   }
 
-  private beginCount: number = 0;
 
   ngOnInit() {
    this.purchaseSubscription =  this.commService.subscribe("Purchase", (supply) => {
@@ -38,7 +37,6 @@ export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
           this.refreshDataSource();
           break;
         case SupplyMessage.ADD:
-
           let purchase = <PurchaseSupply>JSON.parse(supply.supply);
           (<any>purchase).date = new Date(purchase.timestamp);
           this.purchaseData.push(purchase);

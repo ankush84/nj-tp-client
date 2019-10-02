@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { CommService, ISubscription } from '../comm/comm.service';
+import { SupplyMessage } from '../comm/payload';
+import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-products-available',
@@ -7,9 +10,79 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsAvailableComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  displayedColumns = ['date', 'productName', 'qty', 'purchaseId'];
 
-  ngOnInit() {
+  @Input()
+  dataSource: MatTableDataSource<StockSupply>;
+
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+
+  stockData: StockSupply[] = [];
+  stockSubscription: ISubscription;
+  private beginCount: number = 0;
+
+  constructor(private commService: CommService) {
+
+    this.dataSource = new MatTableDataSource(this.stockData);
   }
 
+  ngOnInit() {
+    this.stockSubscription =  this.commService.subscribe("Stock", (supply) => {
+
+      switch (supply.phase) {
+        case SupplyMessage.BATCH_BEGIN: this.beginCount++; break;
+        case SupplyMessage.BATCH_END: this.beginCount--;
+          this.refreshDataSource();
+          break;
+        case SupplyMessage.ADD:
+          let stock = <StockSupply>JSON.parse(supply.supply);
+          (<any>stock).date = new Date(stock.timestamp);
+          this.stockData.push(stock);
+
+          this.refreshDataSource();
+
+          break;
+        case SupplyMessage.DELETE:
+
+          //this.purchaseHistoryMap.delete(purchase.id);
+          break;
+      }
+
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.stockSubscription.dispose();
+  }
+
+  private refreshDataSource() {
+    if (this.beginCount === 0) {
+      this.dataSource = new MatTableDataSource(this.stockData);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+      });
+
+    }
+  }
+
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+}
+
+export class StockSupply {
+  id: number;
+  purchaseId: number;
+  productName: String;
+  qty: number;
+  timestamp: number;
 }
