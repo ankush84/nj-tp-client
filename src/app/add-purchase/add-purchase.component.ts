@@ -35,9 +35,13 @@ export class AddPurchaseComponent implements OnInit {
     args['details'] = this.form.get('details').value;
 
     this.commService.request("AddPurchase", args).then((reply) => {
-      
+
       this.dialogRef.close();
     }
     );
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

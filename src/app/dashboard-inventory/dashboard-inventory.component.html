@@ -12,6 +12,7 @@
         <span class="example-spacer"></span>
         <div fxShow="true" fxHide.lt-md="true">
             <a mat-button (click)="onAddPurchase()">New Purchase</a>           
+            <a mat-button (click)="onAddProduction()">New Production</a>           
         </div>
 
     </mat-toolbar>
@@ -20,7 +21,8 @@
         <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"
         fixedInViewport="true" opened="false" fxHide.gt-sm="true">
             <div fxLayout="column">
-                <a mat-button onclick="onAddPurchase">New Purchase</a>
+                    <a mat-button onclick="onAddPurchase">New Purchase</a>  
+                    <a mat-button onclick="onAddProduction">New Production</a>  
                 
             </div>
         </mat-sidenav>

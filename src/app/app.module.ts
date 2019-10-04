@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardInventoryComponent } from './dashboard-inventory/dashboard-inventory.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { AddPurchaseComponent } from './add-purchase/add-purchase.component';
+import { AddProductionComponent } from './add-production/add-production.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AddPurchaseComponent } from './add-purchase/add-purchase.component';
     LoginComponent,
     DashboardInventoryComponent,
     AddPurchaseComponent,
+    AddProductionComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,7 @@ import { AddPurchaseComponent } from './add-purchase/add-purchase.component';
     FlexLayoutModule
   ],
 
-  entryComponents: [AddPurchaseComponent],
+  entryComponents: [AddPurchaseComponent, AddProductionComponent],
 
   providers: [],
   bootstrap: [AppComponent]
