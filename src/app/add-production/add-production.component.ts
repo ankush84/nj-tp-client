@@ -3,6 +3,7 @@ import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { CommService } from '../comm/comm.service';
 import { MatDialogRef } from '@angular/material';
 
+
 @Component({
   selector: 'app-add-production',
   templateUrl: './add-production.component.html',
@@ -50,19 +51,29 @@ control.removeAt(i);
   save() {
 
     let args = {};
-    // args['billingId'] = this.form.get('billingId').value;
-    // args['productName'] = this.form.get('productName').value;
-    // args['qty'] = this.form.get('qty').value;
-    // args['price'] = this.form.get('price').value;
-    // args['details'] = this.form.get('details').value;
+    args['lotNumber'] = this.form.get('lotNumber').value;    
+    args['details'] = this.form.get('details').value;
 
-    this.dialogRef.close();
+    let productNames=[];
+    let qtyUsed=[];
+    let qtyWaste=[];
+    let productArray=<FormArray> this.form.get('products');
+    for (let index = 0; index < productArray.length; index++) {
+      const element =productArray.at(index);
+      productNames.push(element.get('productName').value);
+      qtyUsed.push(element.get('qtyUsed').value);
+      qtyWaste.push(element.get('qtyWaste').value);      
+    }
 
-    // this.commService.request("AddProduction", args).then((reply) => {
+    args['productNames']=productNames;
+    args['qtyUsed']=qtyUsed;
+    args['qtyWaste']=qtyWaste;    
 
-    //   this.dialogRef.close();
-    // }
-   // );
+    this.commService.request("AddProduction", args).then((reply) => {
+
+      this.dialogRef.close();
+    }
+   );
   }
 
   close() {
