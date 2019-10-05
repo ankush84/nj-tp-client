@@ -40,6 +40,7 @@ export class RequestMessage {
 
 export class SubscriptionMessage {
   topic: string;
+  id: string;
   //Todo : add support for limited fields subscription
 }
 
@@ -55,6 +56,7 @@ export class SupplyMessage {
   phase: number;
   supply: string;
   topic: string;
+  id: string;
 
   //Todo : add support for limited fields subscription
 }

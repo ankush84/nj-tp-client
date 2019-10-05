@@ -11,7 +11,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 export class ProductsAvailableComponent implements OnInit {
 
   @Input()
-  displayedColumns = ['date', 'productName', 'qty', 'purchaseId'];
+  displayedColumns = ['date', 'productName', 'qty', 'price','purchaseId'];
 
   @Input()
   dataSource: MatTableDataSource<StockSupply>;
@@ -37,7 +37,7 @@ export class ProductsAvailableComponent implements OnInit {
           break;
         case SupplyMessage.ADD:
           let stock = <StockSupply>JSON.parse(supply.supply);
-          (<any>stock).date = new Date(stock.timestamp);
+          (<any>stock).date = new Date(stock.timestamp).toString().slice(0,24);;
           this.stockData.push(stock);
 
           this.refreshDataSource();
@@ -84,5 +84,6 @@ export class StockSupply {
   purchaseId: number;
   productName: String;
   qty: number;
+  price: number;
   timestamp: number;
 }

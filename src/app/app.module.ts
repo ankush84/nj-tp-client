@@ -22,25 +22,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsSummaryComponent } from './products-summary/products-summary.component';
-import { ProductsConsumeComponent } from './products-consume/products-consume.component';
+import { ProductionJobsComponent } from './production-jobs/production-jobs.component';
 import { ProductsAvailableComponent } from './products-available/products-available.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardInventoryComponent } from './dashboard-inventory/dashboard-inventory.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { AddPurchaseComponent } from './add-purchase/add-purchase.component';
 import { AddProductionComponent } from './add-production/add-production.component';
+import { ProductionSummaryComponent } from './production-summary/production-summary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsSummaryComponent,
-    ProductsConsumeComponent,
+    ProductionJobsComponent,
     ProductsAvailableComponent,
     PurchaseHistoryComponent,
     LoginComponent,
     DashboardInventoryComponent,
     AddPurchaseComponent,
     AddProductionComponent,
+    ProductionSummaryComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,32 +4,31 @@ import { SupplyMessage } from '../comm/payload';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
-  selector: 'app-purchase-history',
-  templateUrl: './purchase-history.component.html',
-  styleUrls: ['./purchase-history.component.less']
+  selector: 'app-production-jobs',
+  templateUrl: './production-jobs.component.html',
+  styleUrls: ['./production-jobs.component.less']
 })
-export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
- 
-  @Input()
-  displayedColumns = ['date', 'billingId', 'productName', 'price', 'qty', 'details'];
+export class ProductionJobsComponent implements OnInit {
 
   @Input()
-  dataSource: MatTableDataSource<PurchaseSupply>;
+  displayedColumns = ['date', 'lotNumber' ,'productName', 'qtyUsed','qtyWaste', 'purchaseId','details'];
+
+  @Input()
+  dataSource: MatTableDataSource<ProductionJobSupply>;
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  purchaseData: PurchaseSupply[] = [];
-  purchaseSubscription: ISubscription;
+  jobData: ProductionJobSupply[] = [];
+  stockSubscription: ISubscription;
   private beginCount: number = 0;
 
   constructor(private commService: CommService) {
 
-    this.dataSource = new MatTableDataSource(this.purchaseData);
+    this.dataSource = new MatTableDataSource(this.jobData);
   }
 
-
   ngOnInit() {
-   this.purchaseSubscription =  this.commService.subscribe("Purchase", (supply) => {
+    this.stockSubscription =  this.commService.subscribe("Production", (supply) => {
 
       switch (supply.phase) {
         case SupplyMessage.BATCH_BEGIN: this.beginCount++; break;
@@ -37,9 +36,10 @@ export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
           this.refreshDataSource();
           break;
         case SupplyMessage.ADD:
-          let purchase = <PurchaseSupply>JSON.parse(supply.supply);
-          (<any>purchase).date = new Date(purchase.timestamp).toString().slice(0,24);
-          this.purchaseData.push(purchase);
+          let job = <ProductionJobSupply>JSON.parse(supply.supply);
+          (<any>job).date = new Date(job.timestamp).toString().slice(0,24);;
+
+          this.jobData.push(job);
 
           this.refreshDataSource();
 
@@ -54,12 +54,12 @@ export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.purchaseSubscription.dispose();
+    this.stockSubscription.dispose();
   }
 
   private refreshDataSource() {
     if (this.beginCount === 0) {
-      this.dataSource = new MatTableDataSource(this.purchaseData);
+      this.dataSource = new MatTableDataSource(this.jobData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
       });
@@ -80,12 +80,13 @@ export class PurchaseHistoryComponent implements OnInit ,OnDestroy{
 
 }
 
-export class PurchaseSupply {
+export class ProductionJobSupply {
   id: number;
+  purchaseId: number;
   productName: String;
-  price: number;
-  qty: number;
+  qtyUsed: number;
+  qtyWaste: number;
+  lotNumber: String;
   details: String;
-  billingId: String;
   timestamp: number;
 }

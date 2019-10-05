@@ -5,9 +5,9 @@
 
 <mat-table [dataSource]="dataSource" matSort>
   
-    <ng-container matColumnDef="productName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Product</mat-header-cell>
-        <mat-cell *matCellDef="let model">{{model.productName}}</mat-cell>
+    <ng-container matColumnDef="lotNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Lot Number</mat-header-cell>
+        <mat-cell *matCellDef="let model">{{model.lotNumber}}</mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="qty">
@@ -17,7 +17,7 @@
     </ng-container>
   
     <ng-container matColumnDef="amount">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Cost Amount</mat-header-cell>
         <mat-cell *matCellDef="let model">{{model.amount}}</mat-cell>
     </ng-container>
        

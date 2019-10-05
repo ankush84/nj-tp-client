@@ -12,8 +12,9 @@ export class CommService {
   private ws: WebSocketMessagingAdaptor;
   private loginSesionData: Data;
 
-  private subscriptions: { [topic: string]: Subscription[] } = {};
+  private subscriptions: { [id: string]: Subscription[] } = {};
   private requestCounter: number = 0;
+  private subsCounter: number = 0;
   private pendingRequests: { [id: number]: Deferred<ReplyMessage> }={};
 
 
@@ -42,7 +43,7 @@ export class CommService {
 
               let supply = <SupplyMessage>JSON.parse(data.message);
 
-              let subscriptions = this.subscriptions[supply.topic];
+              let subscriptions = this.subscriptions[supply.id];
               if (subscriptions) {
                 subscriptions.forEach((x) => x.onSupply(supply));
               }
@@ -104,16 +105,17 @@ export class CommService {
     data.sessionId = this.loginSesionData.sessionId;
     let subMs = new SubscriptionMessage();
     subMs.topic = topic;
+    subMs.id = (this.subsCounter++).toString();
 
     data.message = JSON.stringify(subMs);
     this.ws.send(data);
 
-    let subscription = new Subscription(topic, onSupply, this);
+    let subscription = new Subscription(subMs.id,topic, onSupply, this);
 
-    if (!this.subscriptions[topic]) this.subscriptions[topic] = [];
+    if (!this.subscriptions[subMs.id]) this.subscriptions[subMs.id] = [];
 
 
-    this.subscriptions[topic].push(subscription);
+    this.subscriptions[subMs.id].push(subscription);
 
     return subscription;
   }
@@ -131,11 +133,12 @@ export class CommService {
     data.sessionId = this.loginSesionData.sessionId;
     let subMs = new SubscriptionMessage();
     subMs.topic = sub.topic;
+    subMs.id = sub.id;
 
     data.message = JSON.stringify(subMs);
     this.ws.send(data);    
 
-    if (this.subscriptions[sub.topic]) this.subscriptions[sub.topic] = [];   
+    if (this.subscriptions[sub.id]) this.subscriptions[sub.id] = [];   
 
   }
 
@@ -177,6 +180,7 @@ export class CommService {
 export interface ISubscription {
   dispose();
   readonly topic: String;
+  readonly id: String;
 
 }
 
@@ -186,6 +190,7 @@ export class Subscription implements ISubscription {
 
 
   constructor(private _topic: string,
+    private _id: string,
     public onSupply: (suply: SupplyMessage) => void,
     private commService: CommService) {
 
@@ -193,6 +198,11 @@ export class Subscription implements ISubscription {
 
   public get topic(): string {
     return this._topic;
+  }
+
+  
+  public get id(): string {
+    return this._id;
   }
 
 

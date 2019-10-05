@@ -4,33 +4,33 @@ import { SupplyMessage } from '../comm/payload';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
-  selector: 'app-products-summary',
-  templateUrl: './products-summary.component.html',
-  styleUrls: ['./products-summary.component.less']
+  selector: 'app-production-summary',
+  templateUrl: './production-summary.component.html',
+  styleUrls: ['./production-summary.component.less']
 })
-export class ProductsSummaryComponent implements OnInit {
+export class ProductionSummaryComponent implements OnInit {
 
 
   @Input()
-  displayedColumns = ['productName', 'qty', 'amount'];
+  displayedColumns = ['lotNumber', 'qty', 'amount'];
 
   @Input()
-  dataSource: MatTableDataSource<StockSummary>;
+  dataSource: MatTableDataSource<ProductionSummary>;
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  stockData: StockSummary[] = [];
-  stockDetails:{[productName:string]:{[id:number] : StockSupply}} = {};
-  stockSubscription: ISubscription;
+  summary: ProductionSummary[] = [];
+  details:{[productName:string]:{[id:number] : ProductionJobSupply}} = {};
+  subscription: ISubscription;
   private beginCount: number = 0;
 
   constructor(private commService: CommService) {
 
-    this.dataSource = new MatTableDataSource(this.stockData);
+    this.dataSource = new MatTableDataSource(this.summary);
   }
 
   ngOnInit() {
-    this.stockSubscription =  this.commService.subscribe("Stock", (supply) => {
+    this.subscription =  this.commService.subscribe("Production", (supply) => {
 
       switch (supply.phase) {
         case SupplyMessage.BATCH_BEGIN: this.beginCount++; break;
@@ -38,14 +38,14 @@ export class ProductsSummaryComponent implements OnInit {
           this.refreshDataSource();
           break;
         case SupplyMessage.ADD:
-          let stock = <StockSupply>JSON.parse(supply.supply);
-          if(!stock.productName || stock.productName==null)break;
-          if(!this.stockDetails[stock.productName.toString()])
+          let production = <ProductionJobSupply>JSON.parse(supply.supply);
+          if(!production.lotNumber || production.lotNumber==null)break;
+          if(!this.details[production.lotNumber.toString()])
           {
-            this.stockDetails[stock.productName.toString()]={};
+            this.details[production.lotNumber.toString()]={};
           }
 
-          this.stockDetails[stock.productName.toString()][stock.id]=stock;
+          this.details[production.lotNumber.toString()][production.id]=production;
 
           
           //this.stockData.push(stock);
@@ -63,29 +63,30 @@ export class ProductsSummaryComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.stockSubscription.dispose();
+    this.subscription.dispose();
   }
 
   private refreshDataSource() {
     if (this.beginCount === 0) {
-      this.stockData=[];
-      Object.keys(this.stockDetails).forEach(key => {
+      this.summary=[];
+      Object.keys(this.details).forEach(key => {
         
-        let summary = new StockSummary();
-        summary.productName=key;
+        let summary = new ProductionSummary();
+        summary.lotNumber=key;
         summary.qty=0;
         summary.amount=0;
 
-        Object.keys(this.stockDetails[key]).forEach(id => {
-          let stk =<StockSupply> this.stockDetails[key][id];
-          summary.qty+=stk.qty;
-          summary.amount+=(stk.qty * stk.price);
+        Object.keys(this.details[key]).forEach(id => {
+          let sup =<ProductionJobSupply> this.details[key][id];
+          let totalQty =sup.qtyUsed+ sup.qtyWaste;
+          summary.qty+=totalQty;
+          summary.amount+=(totalQty * sup.price);
 
         });
-        this.stockData.push(summary);
+        this.summary.push(summary);
       });
 
-      this.dataSource = new MatTableDataSource(this.stockData);
+      this.dataSource = new MatTableDataSource(this.summary);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
       });
@@ -106,17 +107,20 @@ export class ProductsSummaryComponent implements OnInit {
 
 }
 
-class StockSummary {
-  productName: String;
+class ProductionSummary {
+  lotNumber: String;
   qty: number;
   amount: number;
 }
 
-class StockSupply {
+ class ProductionJobSupply {
   id: number;
   purchaseId: number;
   productName: String;
-  qty: number;
+  qtyUsed: number;
+  qtyWaste: number;
   price: number;
+  lotNumber: String;
+  details: String;
   timestamp: number;
 }

@@ -61,8 +61,8 @@ control.removeAt(i);
     for (let index = 0; index < productArray.length; index++) {
       const element =productArray.at(index);
       productNames.push(element.get('productName').value);
-      qtyUsed.push(element.get('qtyUsed').value);
-      qtyWaste.push(element.get('qtyWaste').value);      
+      qtyUsed.push(element.get('qtyUsed').value.toString());
+      qtyWaste.push(element.get('qtyWaste').value.toString());      
     }
 
     args['productNames']=productNames;

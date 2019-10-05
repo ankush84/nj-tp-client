@@ -30,8 +30,8 @@ export class AddPurchaseComponent implements OnInit {
     let args = {};
     args['billingId'] = this.form.get('billingId').value;
     args['productName'] = this.form.get('productName').value;
-    args['qty'] = this.form.get('qty').value;
-    args['price'] = this.form.get('price').value;
+    args['qty'] = this.form.get('qty').value.toString();
+    args['price'] = this.form.get('price').value.toString();
     args['details'] = this.form.get('details').value;
 
     this.commService.request("AddPurchase", args).then((reply) => {
