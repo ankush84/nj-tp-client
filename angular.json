@@ -16,8 +16,8 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/nj-tp-app",
+          "options": {            
+            "outputPath": "../../server/nj-tp-server/src/main/resources/webapp/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
