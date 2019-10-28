@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddPurchaseComponent } from '../add-purchase/add-purchase.component';
-import { AddProductionComponent } from '../add-production/add-production.component';
+import { AddProductionTprComponent } from '../add-production-tpr/add-production-tpr.component';
 
 @Component({
   selector: 'app-dashboard-inventory',
@@ -29,7 +29,10 @@ onAddProduction() {
 
   const dialogConfig = new MatDialogConfig();
 
-  this.dialog.open(AddProductionComponent, dialogConfig);
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+  this.dialog.open(AddProductionTprComponent, dialogConfig);
 }
 
 }

@@ -30,6 +30,8 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
 import { AddPurchaseComponent } from './add-purchase/add-purchase.component';
 import { AddProductionComponent } from './add-production/add-production.component';
 import { ProductionSummaryComponent } from './production-summary/production-summary.component';
+import { AddProductionTprComponent } from './add-production-tpr/add-production-tpr.component';
+import { AddProductionCustomFieldComponent } from './add-production-custom-field/add-production-custom-field.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { ProductionSummaryComponent } from './production-summary/production-summ
     AddPurchaseComponent,
     AddProductionComponent,
     ProductionSummaryComponent,
+    AddProductionTprComponent,
+    AddProductionCustomFieldComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,7 @@ import { ProductionSummaryComponent } from './production-summary/production-summ
     FlexLayoutModule
   ],
 
-  entryComponents: [AddPurchaseComponent, AddProductionComponent],
+  entryComponents: [AddPurchaseComponent, AddProductionComponent, AddProductionTprComponent],
 
   providers: [],
   bootstrap: [AppComponent]
