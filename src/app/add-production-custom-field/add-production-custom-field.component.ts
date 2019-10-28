@@ -8,7 +8,7 @@ import {Subject} from 'rxjs';
 
 /** Data structure for holding telephone number. */
 export class ProductQty {
-  constructor(public qtyUSed: number, public qtyWaste: number) {}
+  constructor(public qtyUsed: number, public qtyWaste: number) {}
 }
 
 @Component({
@@ -36,9 +36,9 @@ export class AddProductionCustomFieldComponent implements ControlValueAccessor, 
   onTouched = () => {};
 
   get empty() {
-    const {value: {qtyUSed, qtyWaste}} = this.parts;
+    const {value: {qtyUsed, qtyWaste}} = this.parts;
 
-    return !qtyUSed && !qtyWaste;
+    return !qtyUsed && !qtyWaste;
   }
 
   get shouldLabelFloat() { return this.focused || !this.empty; }
@@ -70,13 +70,13 @@ export class AddProductionCustomFieldComponent implements ControlValueAccessor, 
 
   @Input()
   get value(): ProductQty | null {
-    const {value: {qtyUSed, qtyWaste}} = this.parts;
-    return new ProductQty(qtyUSed, qtyWaste);
+    const {value: {qtyUsed, qtyWaste}} = this.parts;
+    return new ProductQty(qtyUsed, qtyWaste);
   }
 
   set value(tel: ProductQty | null) {
-    const {qtyUSed, qtyWaste} = tel || new ProductQty(undefined, undefined);
-    this.parts.setValue({qtyUSed, qtyWaste});
+    const {qtyUsed, qtyWaste} = tel || new ProductQty(null, null);
+    this.parts.setValue({qtyUsed, qtyWaste});
     this.stateChanges.next();
   }
 
@@ -87,7 +87,7 @@ export class AddProductionCustomFieldComponent implements ControlValueAccessor, 
     @Optional() @Self() public ngControl: NgControl) {
 
     this.parts = formBuilder.group({
-      qtyUSed: '',
+      qtyUsed: '',
       qtyWaste: '',
     });
 

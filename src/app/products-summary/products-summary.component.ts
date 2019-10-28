@@ -37,7 +37,8 @@ export class ProductsSummaryComponent implements OnInit {
         case SupplyMessage.BATCH_END: this.beginCount--;
           this.refreshDataSource();
           break;
-        case SupplyMessage.ADD:
+          case SupplyMessage.ADD:
+          case SupplyMessage.UPDATE:
           let stock = <StockSupply>JSON.parse(supply.supply);
           if(!stock.productName || stock.productName==null)break;
           if(!this.stockDetails[stock.productName.toString()])

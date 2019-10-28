@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>New Production</h2>
+<h2 mat-dialog-title>TPR Production</h2>
 <mat-dialog-content [formGroup]="form">
     <div fxLayout="row" fxLayoutGap="20px">
         <div>
@@ -15,7 +15,7 @@
     <div fxLayout="row" fxLayoutGap="5px">
         <div>
             <mat-form-field>
-                <app-add-production-custom-field placeholder="DRY 401" formControlName="dry401">
+                <app-add-production-custom-field placeholder="DRY 401" formControlName="_dry401">
                 </app-add-production-custom-field>
             </mat-form-field>
         </div>
@@ -31,7 +31,7 @@
     </div> -->
 
     <div fxLayout="row" fxLayoutGap="5px">
-            <div style="padding: 2.5%;margin-right: 10px">
+            <div style="padding-top: 2.5%;margin-right: 10px">
                     Oil Extended
                 </div>
         <div>
@@ -62,7 +62,7 @@
     </div>
 
     <div fxLayout="row" fxLayoutGap="5px">
-            <div style="padding: 2.5%;margin-right: 10px">
+            <div style="padding-top: 2.5%;margin-right: 10px">
                     K. Resin.
                 </div>
         <div>
@@ -95,7 +95,7 @@
 
     
     <div fxLayout="row" fxLayoutGap="5px">
-            <div style="padding: 2.5%;margin-right: 10px">
+            <div style="padding-top: 2.5%;margin-right: 10px">
                    Crystal
                 </div>
         <div>
@@ -145,12 +145,12 @@
                     </div>
                     <div>
                         <mat-form-field>
-                            <input type="number" matInput placeholder="Qty Used" formControlName="qtyUsed">
+                            <input type="number" style="text-align: right" matInput placeholder="Qty Used" formControlName="qtyUsed">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field>
-                            <input type="number" matInput placeholder="Qty Waste" formControlName="qtyWaste">
+                            <input type="number" style="text-align: right" matInput placeholder="Qty Waste" formControlName="qtyWaste">
                         </mat-form-field>
                     </div>
                     <div *ngIf="form.controls.products.controls.length > 1" (click)="removeProduct(i)">                        
