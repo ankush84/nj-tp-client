@@ -15,7 +15,8 @@ import {
   MatDialogModule,
   MatIconModule, 
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatMenuModule,
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -64,7 +65,8 @@ import { AddProductionCustomFieldComponent } from './add-production-custom-field
     MatToolbarModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatMenuModule,
   ],
 
   entryComponents: [AddPurchaseComponent, AddProductionComponent, AddProductionTprComponent],

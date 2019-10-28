@@ -10,10 +10,55 @@
             <span>Nikhil Thermoplast</span>
         </a>
         <span class="example-spacer"></span>
-        <div fxShow="true" fxHide.lt-md="true">
+        <!-- <div fxShow="true" fxHide.lt-md="true">
             <a mat-button (click)="onAddPurchase()">New Purchase</a>
             <a mat-button (click)="onAddProduction()">New Production</a>
+        </div> -->
+
+
+        <div fxShow="true" fxHide.lt-md="true">
+        <a mat-button  [matMenuTriggerFor]="menuPurchase">
+                Add Purchase
+        </a>
+            <mat-menu #menuPurchase="matMenu" [overlapTrigger]="false">
+                <button style="display: block" mat-button (click)="onAddPurchase('DRY 401')">DRY 401</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('602')">602</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('675')">675</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('684')">684</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('685')">685</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('687')">687</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('K. Resin 99')">K. Resin 99</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Denka')">Denka</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('CN 08')">CN 08</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('K. Resin Second')">K. Resin Second</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Crystal First')">Crystal First</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Crystal Second')">Crystal Second</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Oil')">Oil</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Calcium')">Calcium</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Colour')">Colour</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('SEBS 7550')">SEBS 7550</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('SEBS 7551')">SEBS 7551</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('P.P. First')">P.P. First</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('P.P. Second')">P.P. Second</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Anti Oxident')">Anti Oxident</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('Vistamax')">Vistamax</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('SBS 401')">SBS 401</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('SBS')">SBS</button>
+                <button style="display: block" mat-button (click)="onAddPurchase('')">Other...</button>
+                
+              </mat-menu>
+              <a mat-button  [matMenuTriggerFor]="menuProduction">
+                    Add Production
+            </a>
+                  <mat-menu #menuProduction="matMenu" [overlapTrigger]="false">
+                    <button style="display: block"  mat-button (click)="onAddTPRProduction()">TPR</button >
+                    <button style="display: block"  mat-button (click)="onAddTPEProduction()">TPE</button >
+                    <button style="display: block"  mat-button (click)="onAddModifierProduction()">Modifier</button >
+                    <button style="display: block"  mat-button (click)="onAddMasterBatchProduction()">Master Batch</button >
+                    <button style="display: block"  mat-button (click)="onAddProduction()">Other...</button >
+                  </mat-menu>
         </div>
+
 
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill class="example-container">
@@ -21,8 +66,46 @@
         <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" fixedInViewport="true" opened="false"
             fxHide.gt-sm="true">
             <div fxLayout="column">
-                <a mat-button onclick="onAddPurchase">New Purchase</a>
-                <a mat-button onclick="onAddProduction">New Production</a>
+                    <a mat-button  [matMenuTriggerFor]="menuPurchase">
+                            Add Purchase
+                    </a>
+                        <mat-menu #menuPurchase="matMenu" [overlapTrigger]="false">
+                            <button style="display: block" mat-button (click)="onAddPurchase('DRY 401')">DRY 401</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('602')">602</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('675')">675</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('684')">684</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('685')">685</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('687')">687</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('K. Resin 99')">K. Resin 99</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Denka')">Denka</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('CN 08')">CN 08</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('K. Resin Second')">K. Resin Second</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Crystal First')">Crystal First</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Crystal Second')">Crystal Second</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Oil')">Oil</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Calcium')">Calcium</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Colour')">Colour</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('SEBS 7550')">SEBS 7550</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('SEBS 7551')">SEBS 7551</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('P.P. First')">P.P. First</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('P.P. Second')">P.P. Second</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Anti Oxident')">Anti Oxident</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('Vistamax')">Vistamax</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('SBS 401')">SBS 401</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('SBS')">SBS</button>
+                            <button style="display: block" mat-button (click)="onAddPurchase('')">Other...</button>
+                            
+                          </mat-menu>
+                          <a mat-button  [matMenuTriggerFor]="menuProduction">
+                                Add Production
+                        </a>
+                              <mat-menu #menuProduction="matMenu" [overlapTrigger]="false">
+                                <button style="display: block"  mat-button (click)="onAddTPRProduction()">TPR</button >
+                                <button style="display: block"  mat-button (click)="onAddTPEProduction()">TPE</button >
+                                <button style="display: block"  mat-button (click)="onAddModifierProduction()">Modifier</button >
+                                <button style="display: block"  mat-button (click)="onAddMasterBatchProduction()">Master Batch</button >
+                                <button style="display: block"  mat-button (click)="onAddProduction()">Other...</button >
+                              </mat-menu>
 
             </div>
         </mat-sidenav>

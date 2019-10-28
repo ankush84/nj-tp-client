@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddPurchaseComponent } from '../add-purchase/add-purchase.component';
 import { AddProductionTprComponent } from '../add-production-tpr/add-production-tpr.component';
+import { AddProductionComponent } from '../add-production/add-production.component';
 
 @Component({
   selector: 'app-dashboard-inventory',
@@ -15,17 +16,17 @@ export class DashboardInventoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddPurchase() {
+  onAddPurchase(productName:string) {
 
     const dialogConfig = new MatDialogConfig();
 
-    //dialogConfig.disableClose = true;
+    dialogConfig.disableClose = true;
     //dialogConfig.autoFocus = true;
-
+    dialogConfig.data=productName;
     this.dialog.open(AddPurchaseComponent, dialogConfig);
 }
 
-onAddProduction() {
+onAddTPRProduction() {
 
   const dialogConfig = new MatDialogConfig();
 
@@ -34,5 +35,44 @@ onAddProduction() {
 
   this.dialog.open(AddProductionTprComponent, dialogConfig);
 }
+
+onAddTPEProduction() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+  this.dialog.open(AddProductionTprComponent, dialogConfig);
+}
+
+onAddModifierProduction() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+  this.dialog.open(AddProductionTprComponent, dialogConfig);
+}
+onAddMasterBatchProduction() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+  this.dialog.open(AddProductionTprComponent, dialogConfig);
+}
+onAddProduction() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+  this.dialog.open(AddProductionComponent, dialogConfig);
+}
+
 
 }
