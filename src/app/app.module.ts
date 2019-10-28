@@ -34,6 +34,7 @@ import { ProductionSummaryComponent } from './production-summary/production-summ
 import { AddProductionTprComponent } from './add-production-tpr/add-production-tpr.component';
 import { AddProductionCustomFieldComponent } from './add-production-custom-field/add-production-custom-field.component';
 import { AddProductionTpeComponent } from './add-production-tpe/add-production-tpe.component';
+import { AddProductionModifierComponent } from './add-production-modifier/add-production-modifier.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AddProductionTpeComponent } from './add-production-tpe/add-production-t
     AddProductionTprComponent,
     AddProductionCustomFieldComponent,
     AddProductionTpeComponent,
+    AddProductionModifierComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,7 @@ import { AddProductionTpeComponent } from './add-production-tpe/add-production-t
     MatMenuModule,
   ],
 
-  entryComponents: [AddPurchaseComponent, AddProductionComponent, AddProductionTprComponent,AddProductionTpeComponent ],
+  entryComponents: [AddPurchaseComponent, AddProductionComponent, AddProductionTprComponent,AddProductionTpeComponent ,AddProductionModifierComponent],
 
   providers: [],
   bootstrap: [AppComponent]

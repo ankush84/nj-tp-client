@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>Modifier Production</h2>
+<mat-dialog-content [formGroup]="form">
+    <div fxLayout="row" fxLayoutGap="20px">
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Lot Number" formControlName="lotNumber">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Details" formControlName="details">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="5px">
+            <div style="padding-top: 2.5%;margin-right: 10px">
+                    Oil Extended
+                </div>
+        <div>
+            <mat-form-field>
+                <app-add-production-custom-field placeholder="675" formControlName="_675">
+                </app-add-production-custom-field>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <app-add-production-custom-field placeholder="684" formControlName="_684">
+                </app-add-production-custom-field>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <app-add-production-custom-field placeholder="685" formControlName="_685">
+                </app-add-production-custom-field>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <app-add-production-custom-field placeholder="687" formControlName="_687">
+                </app-add-production-custom-field>
+            </mat-form-field>
+
+        </div>
+    </div>
+
+    
+    <div fxLayout="row" fxLayoutGap="5px">
+        <div>
+            <mat-form-field>
+                <app-add-production-custom-field placeholder="Oil" formControlName="_oil">
+                </app-add-production-custom-field>
+            </mat-form-field>
+        </div>
+        <div>
+                <mat-form-field>
+                    <app-add-production-custom-field placeholder="Calcium" formControlName="_calcium">
+                    </app-add-production-custom-field>
+                </mat-form-field>
+            </div>
+    </div>
+    
+    <div fxLayout="column">
+        <div formArrayName="products">
+            <div *ngFor="let product of form.controls.products.controls; let i=index">
+                <div fxLayout="row" fxLayoutGap="5px" [formGroupName]="i" style="max-height: 5em">
+                    <div>
+                        <mat-form-field>
+                            <input matInput placeholder="Product Name" formControlName="productName">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <input type="number" style="text-align: right" matInput placeholder="Qty Used" formControlName="qtyUsed">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <input type="number" style="text-align: right" matInput placeholder="Qty Waste" formControlName="qtyWaste">
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="form.controls.products.controls.length > 1" (click)="removeProduct(i)">                        
+                            <i class="material-icons pull-right">close</i>                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <button style="margin-bottom: 0.1em" class="mat-raised-button" (click)="addProduct()">Add Product</button>
+        </div>
+    </div>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutGap="15px">
+        <div>
+            <button class="mat-raised-button" (click)="close()">Close</button>
+        </div>
+
+        <div>
+            <button class="mat-raised-button mat-primary" (click)="save()" [disabled]="!form.valid">Save</button>
+
+        </div>
+    </div>
+</mat-dialog-actions>
