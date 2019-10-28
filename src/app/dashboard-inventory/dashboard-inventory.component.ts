@@ -3,6 +3,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddPurchaseComponent } from '../add-purchase/add-purchase.component';
 import { AddProductionTprComponent } from '../add-production-tpr/add-production-tpr.component';
 import { AddProductionComponent } from '../add-production/add-production.component';
+import { AddProductionTpeComponent } from '../add-production-tpe/add-production-tpe.component';
 
 @Component({
   selector: 'app-dashboard-inventory',
@@ -43,7 +44,7 @@ onAddTPEProduction() {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-  this.dialog.open(AddProductionTprComponent, dialogConfig);
+  this.dialog.open(AddProductionTpeComponent, dialogConfig);
 }
 
 onAddModifierProduction() {
