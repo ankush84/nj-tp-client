@@ -5,6 +5,7 @@ import { AddProductionTprComponent } from '../add-production-tpr/add-production-
 import { AddProductionComponent } from '../add-production/add-production.component';
 import { AddProductionTpeComponent } from '../add-production-tpe/add-production-tpe.component';
 import { AddProductionModifierComponent } from '../add-production-modifier/add-production-modifier.component';
+import { AddProductionMasterBatchComponent } from '../add-production-master-batch/add-production-master-batch.component';
 
 @Component({
   selector: 'app-dashboard-inventory',
@@ -64,7 +65,7 @@ onAddMasterBatchProduction() {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-  this.dialog.open(AddProductionTprComponent, dialogConfig);
+  this.dialog.open(AddProductionMasterBatchComponent, dialogConfig);
 }
 onAddProduction() {
 
