@@ -97,10 +97,12 @@ export class AddProductionModifierComponent implements OnInit {
       args['qtyWaste']=qtyWaste;    
   
       this.commService.request("AddProduction", args).then((reply) => {
-  
+  if(reply.returnCode===0){
         this.dialogRef.close();
       }
-     );
+    else{
+      window.alert(reply.returnValues[0]);
+      }});
     }
     checkAndAdd(formProp: string, productName: string) {
       var  val= <ProductQty>this.form.get(formProp).value;

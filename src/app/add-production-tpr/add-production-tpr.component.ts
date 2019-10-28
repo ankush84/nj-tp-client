@@ -118,9 +118,12 @@ private productQtyArry:{name:string,qtyUsed:number,qtyWaste:number}[]=[];
 
     this.commService.request("AddProduction", args).then((reply) => {
 
-      this.dialogRef.close();
-    }
-   );
+      if(reply.returnCode===0){
+        this.dialogRef.close();
+      }
+    else{
+      window.alert(reply.returnValues[0]);
+      }});
   }
   checkAndAdd(formProp: string, productName: string) {
     var  val= <ProductQty>this.form.get(formProp).value;

@@ -26,7 +26,7 @@ export class User {
 export class ReplyMessage {
   name: string;
   id: number;
-  returnvaues: any[];
+  returnValues: any[];
   returnCode: number;
 }
 
