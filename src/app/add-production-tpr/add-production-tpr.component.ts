@@ -81,7 +81,7 @@ private productQtyArry:{name:string,qtyUsed:number,qtyWaste:number}[]=[];
     this.checkAndAdd('_kr99',"K. Resin 99");
     this.checkAndAdd('_denka',"Denka");
     this.checkAndAdd('_cn08', "CN 08");
-    this.checkAndAdd('_kresinSecond',"K Resin Second");
+    this.checkAndAdd('_kresinSecond',"K. Resin Second");
     this.checkAndAdd('_crystalFirst', "Crystal First");
     this.checkAndAdd('_crystalSecond', "Crystal Second");
     this.checkAndAdd('_oil', "Oil");
