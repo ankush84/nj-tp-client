@@ -132,7 +132,7 @@
         </mat-sidenav>
         <mat-sidenav-content style="height: 95vh; overflow: hidden;">
 
-            <mat-grid-list cols="3" rowHeight="60%">
+            <mat-grid-list cols="3" rowHeight="fit" style="height: 100%">
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
 
                     <mat-card class="scrollable-content" style="height: 100%; width: 100%">
@@ -172,7 +172,7 @@
 
                 <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-tab-group style="height: 100%; width: 100%">
-                        <mat-tab label="Purchace History">
+                        <mat-tab label="Purchace History" class="mat-tab-body-content">
                             <ng-template matTabContent>
                                 <app-purchase-history></app-purchase-history>
                             </ng-template>
