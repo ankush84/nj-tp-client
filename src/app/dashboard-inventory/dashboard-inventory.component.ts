@@ -35,6 +35,7 @@ onAddTPRProduction() {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data="TPR";
 
   this.dialog.open(AddProductionTprComponent, dialogConfig);
 }
@@ -45,6 +46,7 @@ onAddTPEProduction() {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data="TPE";
 
   this.dialog.open(AddProductionTpeComponent, dialogConfig);
 }
@@ -55,6 +57,7 @@ onAddModifierProduction() {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data="Modifier";
 
   this.dialog.open(AddProductionModifierComponent, dialogConfig);
 }
@@ -64,6 +67,7 @@ onAddMasterBatchProduction() {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data="Master Batch";
 
   this.dialog.open(AddProductionMasterBatchComponent, dialogConfig);
 }
@@ -73,6 +77,7 @@ onAddProduction() {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    //dialogConfig.data="";
 
   this.dialog.open(AddProductionComponent, dialogConfig);
 }

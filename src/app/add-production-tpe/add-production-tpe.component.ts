@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { CommService } from '../comm/comm.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProductQty } from '../add-production-custom-field/add-production-custom-field.component';
 
 
@@ -16,11 +16,14 @@ export class AddProductionTpeComponent implements OnInit {
     
     constructor(private commService: CommService,
       private dialogRef: MatDialogRef<AddProductionTpeComponent>,
-      private _fb: FormBuilder  ) { }
+      private _fb: FormBuilder   ,
+      @Inject(MAT_DIALOG_DATA) private data: any ) {
+        
+      }
   
     ngOnInit() {
       this.form = this._fb.group( 
-        {lotNumber:['',Validators.required],
+        {finalProductName:['',Validators.required],
         details:[''],
         _sebs7550:[''],
         _sebs7551:[''],
@@ -33,6 +36,9 @@ export class AddProductionTpeComponent implements OnInit {
         _sbs401:[''],
         products: this._fb.array([this.initProducts()]),
       });
+      if(this.data){
+        this.form.get('finalProductName').setValue(this.data);
+      }
     }
   
     initProducts() {
@@ -60,7 +66,7 @@ export class AddProductionTpeComponent implements OnInit {
     save() {
   
       let args = {};
-      args['lotNumber'] = this.form.get('lotNumber').value;    
+      args['finalProductName'] = this.form.get('finalProductName').value;    
       args['details'] = this.form.get('details').value;
       this.productQtyArry.splice(0,this.productQtyArry.length);
   

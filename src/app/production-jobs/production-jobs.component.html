@@ -10,6 +10,11 @@
         <mat-cell class="duration-cell" *matCellDef="let model">{{model.date}}</mat-cell>
     </ng-container>
     
+    <ng-container matColumnDef="finalProductName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Final Product</mat-header-cell>
+            <mat-cell *matCellDef="let model">{{model.finalProductName}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="lotNumber">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Lot Number</mat-header-cell>
         <mat-cell *matCellDef="let model">{{model.lotNumber}}</mat-cell>

@@ -12,7 +12,7 @@ export class ProductionSummaryComponent implements OnInit {
 
 
   @Input()
-  displayedColumns = ['lotNumber', 'qty', 'amount'];
+  displayedColumns = ['finalProductName', 'qty', 'amount'];
 
   @Input()
   dataSource: MatTableDataSource<ProductionSummary>;
@@ -39,13 +39,13 @@ export class ProductionSummaryComponent implements OnInit {
           break;
         case SupplyMessage.ADD:
           let production = <ProductionJobSupply>JSON.parse(supply.supply);
-          if(!production.lotNumber || production.lotNumber==null)break;
-          if(!this.details[production.lotNumber.toString()])
+          if(!production.finalProductName || production.finalProductName==null)break;
+          if(!this.details[production.finalProductName.toString()])
           {
-            this.details[production.lotNumber.toString()]={};
+            this.details[production.finalProductName.toString()]={};
           }
 
-          this.details[production.lotNumber.toString()][production.id]=production;
+          this.details[production.finalProductName.toString()][production.id]=production;
 
           
           //this.stockData.push(stock);
@@ -72,7 +72,7 @@ export class ProductionSummaryComponent implements OnInit {
       Object.keys(this.details).forEach(key => {
         
         let summary = new ProductionSummary();
-        summary.lotNumber=key;
+        summary.finalProductName=key;
         summary.qty=0;
         summary.amount=0;
 
@@ -108,7 +108,7 @@ export class ProductionSummaryComponent implements OnInit {
 }
 
 class ProductionSummary {
-  lotNumber: String;
+  finalProductName: String;
   qty: number;
   amount: number;
 }
@@ -120,7 +120,7 @@ class ProductionSummary {
   qtyUsed: number;
   qtyWaste: number;
   price: number;
-  lotNumber: String;
+  finalProductName: String;
   details: String;
   timestamp: number;
 }

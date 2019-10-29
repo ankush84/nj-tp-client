@@ -11,7 +11,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 export class ProductionJobsComponent implements OnInit {
 
   @Input()
-  displayedColumns = ['date', 'lotNumber' ,'productName', 'qtyUsed','qtyWaste', 'purchaseId','details'];
+  displayedColumns = ['date','finalProductName', 'lotNumber' ,'productName', 'qtyUsed','qtyWaste', 'purchaseId','details'];
 
   @Input()
   dataSource: MatTableDataSource<ProductionJobSupply>;
@@ -83,6 +83,7 @@ export class ProductionJobsComponent implements OnInit {
 export class ProductionJobSupply {
   id: number;
   purchaseId: number;
+  finalProductName: String;
   productName: String;
   qtyUsed: number;
   qtyWaste: number;
