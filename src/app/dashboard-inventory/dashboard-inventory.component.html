@@ -57,6 +57,17 @@
                     <button style="display: block"  mat-button (click)="onAddMasterBatchProduction()">Master Batch</button >
                     <button style="display: block"  mat-button (click)="onAddProduction()">Other...</button >
                   </mat-menu>
+            
+                  <a mat-button  [matMenuTriggerFor]="menuSale">
+                        Add Sale
+                </a>
+                      <mat-menu #menuSale="matMenu" [overlapTrigger]="false">
+                        <button style="display: block"  mat-button (click)="onAddTPRSale()">TPR</button >
+                        <button style="display: block"  mat-button (click)="onAddTPESale()">TPE</button >
+                        <button style="display: block"  mat-button (click)="onAddModifierSale()">Modifier</button >
+                        <button style="display: block"  mat-button (click)="onAddMasterBatchSale()">Master Batch</button >
+                        <button style="display: block"  mat-button (click)="onAddSale()">Other...</button >
+                      </mat-menu>
         </div>
 
 
@@ -106,12 +117,22 @@
                                 <button style="display: block"  mat-button (click)="onAddMasterBatchProduction()">Master Batch</button >
                                 <button style="display: block"  mat-button (click)="onAddProduction()">Other...</button >
                               </mat-menu>
+                              <a mat-button  [matMenuTriggerFor]="menuSale">
+                                    Add Sale
+                            </a>
+                                  <mat-menu #menuSale="matMenu" [overlapTrigger]="false">
+                                    <button style="display: block"  mat-button (click)="onAddTPRSale()">TPR</button >
+                                    <button style="display: block"  mat-button (click)="onAddTPESale()">TPE</button >
+                                    <button style="display: block"  mat-button (click)="onAddModifierSale()">Modifier</button >
+                                    <button style="display: block"  mat-button (click)="onAddMasterBatchSale()">Master Batch</button >
+                                    <button style="display: block"  mat-button (click)="onAddSale()">Other...</button >
+                                  </mat-menu>
 
             </div>
         </mat-sidenav>
         <mat-sidenav-content style="height: 95vh; overflow: hidden;">
 
-            <mat-grid-list cols="2" rowHeight="50%">
+            <mat-grid-list cols="3" rowHeight="60%">
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
 
                     <mat-card class="scrollable-content" style="height: 100%; width: 100%">
@@ -137,7 +158,19 @@
 
 
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+                        <mat-card class="scrollable-content" style="height: 100%; width: 100%">
+                            <mat-card-header>
+                                <mat-card-title>Sale Summary</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <app-sale-summary></app-sale-summary>
+                            </mat-card-content>
+                        </mat-card>    
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-tab-group style="height: 100%; width: 100%">
                         <mat-tab label="Production Details">
                             <ng-template matTabContent>
@@ -154,7 +187,11 @@
                                 <app-purchase-history></app-purchase-history>
                             </ng-template>
                         </mat-tab>
-
+                        <mat-tab label="Sale Details">
+                                <ng-template matTabContent>
+                                    <app-sale-jobs></app-sale-jobs>
+                                </ng-template>
+                            </mat-tab>
                     </mat-tab-group>
                 </mat-grid-tile>
             </mat-grid-list>

@@ -79,7 +79,7 @@ export class ProductionSummaryComponent implements OnInit {
         Object.keys(this.details[key]).forEach(id => {
           let sup =<ProductionJobSupply> this.details[key][id];
           let totalQty =sup.qtyUsed+ sup.qtyWaste;
-          summary.qty+=totalQty;
+          summary.qty+=sup.qtyUsed;
           summary.amount+=(totalQty * sup.price);
 
         });

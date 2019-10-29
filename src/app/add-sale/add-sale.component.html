@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>New Sale</h2>
+<mat-dialog-content [formGroup]="form">
+    <div fxLayout="row" fxLayoutGap="20px">
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Product" formControlName="product">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input type="number" min="0" style="text-align: right" matInput placeholder="Qty Used"
+                    formControlName="qtyUsed">
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="5px">
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Party" formControlName="party">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Bill No" formControlName="billNo">
+            </mat-form-field>
+        </div>
+    </div>
+
+
+
+    <div fxLayout="row" fxLayoutGap="5px">
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Details" formControlName="details">
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div>
+        <button style="margin-bottom: 0.1em" class="mat-raised-button" (click)="addProduct()">Add Product</button>
+    </div>
+  </mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutGap="15px">
+        <div>
+            <button class="mat-raised-button" (click)="close()">Close</button>
+        </div>
+
+        <div>
+            <button class="mat-raised-button mat-primary" (click)="save()" [disabled]="!form.valid">Save</button>
+
+        </div>
+    </div>
+</mat-dialog-actions>

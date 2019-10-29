@@ -6,6 +6,7 @@ import { AddProductionComponent } from '../add-production/add-production.compone
 import { AddProductionTpeComponent } from '../add-production-tpe/add-production-tpe.component';
 import { AddProductionModifierComponent } from '../add-production-modifier/add-production-modifier.component';
 import { AddProductionMasterBatchComponent } from '../add-production-master-batch/add-production-master-batch.component';
+import { AddSaleComponent } from '../add-sale/add-sale.component';
 
 @Component({
   selector: 'app-dashboard-inventory',
@@ -82,5 +83,59 @@ onAddProduction() {
   this.dialog.open(AddProductionComponent, dialogConfig);
 }
 
+
+
+onAddTPRSale() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data="TPR";
+
+  this.dialog.open(AddSaleComponent, dialogConfig);
+}
+
+onAddTPESale() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data="TPE";
+
+  this.dialog.open(AddSaleComponent, dialogConfig);
+}
+
+onAddModifierSale() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data="Modifier";
+
+  this.dialog.open(AddSaleComponent, dialogConfig);
+}
+onAddMasterBatchSale() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data="Master Batch";
+
+  this.dialog.open(AddSaleComponent, dialogConfig);
+}
+
+onAddSale() {
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+  this.dialog.open(AddSaleComponent, dialogConfig);
+}
 
 }

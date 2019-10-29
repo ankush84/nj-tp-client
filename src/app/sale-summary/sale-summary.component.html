@@ -1,0 +1,30 @@
+<mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      </mat-form-field>
+    
+    <mat-table [dataSource]="dataSource" matSort>
+      
+        <ng-container matColumnDef="party">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Party</mat-header-cell>
+            <mat-cell *matCellDef="let model">{{model.party}}</mat-cell>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="product">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Product</mat-header-cell>
+                <mat-cell *matCellDef="let model">{{model.product}}</mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="qty">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Total Quantity</mat-header-cell>
+            <mat-cell class="qty-cell"
+                      *matCellDef="let model">{{model.qty}}</mat-cell>
+        </ng-container>
+                 
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        
+    
+    </mat-table>
+    

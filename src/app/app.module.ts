@@ -36,6 +36,9 @@ import { AddProductionCustomFieldComponent } from './add-production-custom-field
 import { AddProductionTpeComponent } from './add-production-tpe/add-production-tpe.component';
 import { AddProductionModifierComponent } from './add-production-modifier/add-production-modifier.component';
 import { AddProductionMasterBatchComponent } from './add-production-master-batch/add-production-master-batch.component';
+import { SaleJobsComponent } from './sale-jobs/sale-jobs.component';
+import { SaleSummaryComponent } from './sale-summary/sale-summary.component';
+import { AddSaleComponent } from './add-sale/add-sale.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { AddProductionMasterBatchComponent } from './add-production-master-batch
     AddProductionTpeComponent,
     AddProductionModifierComponent,
     AddProductionMasterBatchComponent,
+    SaleJobsComponent,
+    SaleSummaryComponent,
+    AddSaleComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,7 @@ import { AddProductionMasterBatchComponent } from './add-production-master-batch
     MatMenuModule,
   ],
 
-  entryComponents: [AddPurchaseComponent, AddProductionComponent, AddProductionTprComponent,AddProductionTpeComponent ,AddProductionModifierComponent,AddProductionMasterBatchComponent],
+  entryComponents: [AddPurchaseComponent, AddProductionComponent, AddProductionTprComponent,AddProductionTpeComponent ,AddProductionModifierComponent,AddProductionMasterBatchComponent,AddSaleComponent],
 
   providers: [],
   bootstrap: [AppComponent]
