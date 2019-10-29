@@ -20,7 +20,7 @@ export class ProductionSummaryComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   summary: ProductionSummary[] = [];
-  details:{[productName:string]:{[id:number] : ProductionJobSupply}} = {};
+  details:{[productName:string]:{[id:number] : ProductionStockSupply}} = {};
   subscription: ISubscription;
   private beginCount: number = 0;
 
@@ -30,7 +30,7 @@ export class ProductionSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription =  this.commService.subscribe("Production", (supply) => {
+    this.subscription =  this.commService.subscribe("ProductionStock", (supply) => {
 
       switch (supply.phase) {
         case SupplyMessage.BATCH_BEGIN: this.beginCount++; break;
@@ -38,14 +38,15 @@ export class ProductionSummaryComponent implements OnInit {
           this.refreshDataSource();
           break;
         case SupplyMessage.ADD:
-          let production = <ProductionJobSupply>JSON.parse(supply.supply);
-          if(!production.finalProductName || production.finalProductName==null)break;
-          if(!this.details[production.finalProductName.toString()])
+        case SupplyMessage.UPDATE:
+          let production = <ProductionStockSupply>JSON.parse(supply.supply);
+          if(!production.productName || production.productName==null)break;
+          if(!this.details[production.productName.toString()])
           {
-            this.details[production.finalProductName.toString()]={};
+            this.details[production.productName.toString()]={};
           }
 
-          this.details[production.finalProductName.toString()][production.id]=production;
+          this.details[production.productName.toString()][production.id]=production;
 
           
           //this.stockData.push(stock);
@@ -54,8 +55,21 @@ export class ProductionSummaryComponent implements OnInit {
 
           break;
         case SupplyMessage.DELETE:
-
-          //this.purchaseHistoryMap.delete(purchase.id);
+          let productionToDel = <ProductionStockSupply>JSON.parse(supply.supply);
+          if (this.details[productionToDel.productName.toString()]) {
+            delete this.details[productionToDel.productName.toString()][productionToDel.id];
+            let allRemoved = true;
+            Object.keys(this.details[productionToDel.productName.toString()]).forEach(id => {
+              if (this.details[productionToDel.productName.toString()][id]) {
+                allRemoved = false;
+              }
+            });
+            if (allRemoved) {
+              delete this.details[productionToDel.productName.toString()]
+            }
+          }
+          this.refreshDataSource();
+          
           break;
       }
 
@@ -77,10 +91,11 @@ export class ProductionSummaryComponent implements OnInit {
         summary.amount=0;
 
         Object.keys(this.details[key]).forEach(id => {
-          let sup =<ProductionJobSupply> this.details[key][id];
-          let totalQty =sup.qtyUsed+ sup.qtyWaste;
-          summary.qty+=sup.qtyUsed;
-          summary.amount+=(totalQty * sup.price);
+          let sup =<ProductionStockSupply> this.details[key][id];
+          summary.qty+=sup.qty;
+          if(sup.cost){
+          summary.amount+=sup.cost;
+          }
 
         });
         this.summary.push(summary);
@@ -113,14 +128,11 @@ class ProductionSummary {
   amount: number;
 }
 
- class ProductionJobSupply {
+ class ProductionStockSupply {
   id: number;
-  purchaseId: number;
   productName: String;
-  qtyUsed: number;
-  qtyWaste: number;
-  price: number;
-  finalProductName: String;
-  details: String;
+  qty: number;
+  cost: number;
+  lotNumber: String;
   timestamp: number;
 }

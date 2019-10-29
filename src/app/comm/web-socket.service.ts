@@ -59,7 +59,8 @@ export class WebSocketMessagingAdaptor {
         let observable: Observable<Data> = new Observable((obs: Observer<MessageEvent>) => {
           ws.onmessage = obs.next.bind(obs);
           ws.onerror = obs.error.bind(obs);
-          ws.onclose = obs.complete.bind(obs);
+          ws.onclose = obs.complete
+          .bind(obs);
           return ws.close.bind(ws);
         }).pipe(map(
           (response: MessageEvent): Data => {

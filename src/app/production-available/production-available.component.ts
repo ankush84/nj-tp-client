@@ -4,21 +4,21 @@ import { SupplyMessage } from '../comm/payload';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
-  selector: 'app-products-available',
-  templateUrl: './products-available.component.html',
-  styleUrls: ['./products-available.component.less']
+  selector: 'app-production-available',
+  templateUrl: './production-available.component.html',
+  styleUrls: ['./production-available.component.less']
 })
-export class ProductsAvailableComponent implements OnInit {
+export class ProductionAvailableComponent implements OnInit {
+
+   @Input()
+  displayedColumns = ['date', 'productName', 'qty', 'cost','lotNumber'];
 
   @Input()
-  displayedColumns = ['date', 'productName', 'qty', 'price', 'purchaseId'];
-
-  @Input()
-  dataSource: MatTableDataSource<StockSupply>;
+  dataSource: MatTableDataSource<ProductionStockSupply>;
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  stockData: StockSupply[] = [];
+  stockData: ProductionStockSupply[] = [];
   stockSubscription: ISubscription;
   private beginCount: number = 0;
 
@@ -28,7 +28,7 @@ export class ProductsAvailableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stockSubscription = this.commService.subscribe("Stock", (supply) => {
+    this.stockSubscription =  this.commService.subscribe("ProductionStock", (supply) => {
 
       switch (supply.phase) {
         case SupplyMessage.BATCH_BEGIN: this.beginCount++; break;
@@ -36,16 +36,16 @@ export class ProductsAvailableComponent implements OnInit {
           this.refreshDataSource();
           break;
         case SupplyMessage.ADD:
-        case SupplyMessage.UPDATE:
-          let stock = <StockSupply>JSON.parse(supply.supply);
-          (<any>stock).date = new Date(stock.timestamp).toString().slice(0, 24);;
+          case SupplyMessage.UPDATE:
+          let stock = <ProductionStockSupply>JSON.parse(supply.supply);
+          (<any>stock).date = new Date(stock.timestamp).toString().slice(0,24);;
           this.stockData.push(stock);
 
           this.refreshDataSource();
 
           break;
         case SupplyMessage.DELETE:
-          let toDel = <StockSupply>JSON.parse(supply.supply);
+          let toDel = <ProductionStockSupply>JSON.parse(supply.supply);
 
           let index = -1;
           for (let i; index < this.stockData.length; i++) {
@@ -91,11 +91,11 @@ export class ProductsAvailableComponent implements OnInit {
 
 }
 
-export class StockSupply {
+class ProductionStockSupply {
   id: number;
-  purchaseId: number;
   productName: String;
   qty: number;
-  price: number;
+  cost: number;
+  lotNumber: String;
   timestamp: number;
 }

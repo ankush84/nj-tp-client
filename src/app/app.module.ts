@@ -39,6 +39,7 @@ import { AddProductionMasterBatchComponent } from './add-production-master-batch
 import { SaleJobsComponent } from './sale-jobs/sale-jobs.component';
 import { SaleSummaryComponent } from './sale-summary/sale-summary.component';
 import { AddSaleComponent } from './add-sale/add-sale.component';
+import { ProductionAvailableComponent } from './production-available/production-available.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { AddSaleComponent } from './add-sale/add-sale.component';
     SaleJobsComponent,
     SaleSummaryComponent,
     AddSaleComponent,
+    ProductionAvailableComponent,
   ],
   imports: [
     BrowserModule,

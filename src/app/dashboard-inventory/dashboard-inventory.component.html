@@ -172,21 +172,28 @@
 
                 <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-tab-group style="height: 100%; width: 100%">
-                        <mat-tab label="Production Details">
-                            <ng-template matTabContent>
-                                <app-production-jobs></app-production-jobs>
-                            </ng-template>
-                        </mat-tab>
-                        <mat-tab label="Stock Details">
-                            <ng-template matTabContent>
-                                <app-products-available></app-products-available>
-                            </ng-template>
-                        </mat-tab>
-                        <mat-tab label="Purchace Details">
+                        <mat-tab label="Purchace History">
                             <ng-template matTabContent>
                                 <app-purchase-history></app-purchase-history>
                             </ng-template>
                         </mat-tab>
+                        <mat-tab label="Stock Inventory">
+                                <ng-template matTabContent>
+                                    <app-products-available></app-products-available>
+                                </ng-template>
+                            </mat-tab>
+                           
+                        <mat-tab label="Production History">
+                            <ng-template matTabContent>
+                                <app-production-jobs></app-production-jobs>
+                            </ng-template>
+                        </mat-tab>
+                        <mat-tab label="Production Inventory">
+                                <ng-template matTabContent>
+                                    <app-production-available></app-production-available>
+                                </ng-template>
+                        </mat-tab>
+                            
                         <mat-tab label="Sale Details">
                                 <ng-template matTabContent>
                                     <app-sale-jobs></app-sale-jobs>

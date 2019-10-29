@@ -56,7 +56,20 @@ export class ProductsSummaryComponent implements OnInit {
           break;
         case SupplyMessage.DELETE:
 
-          //this.purchaseHistoryMap.delete(purchase.id);
+          let toDel = <StockSupply>JSON.parse(supply.supply);
+          if (this.stockDetails[toDel.productName.toString()]) {
+            delete this.stockDetails[toDel.productName.toString()][toDel.id];
+            let allRemoved = true;
+            Object.keys(this.stockDetails[toDel.productName.toString()]).forEach(id => {
+              if (this.stockDetails[toDel.productName.toString()][id]) {
+                allRemoved = false;
+              }
+            });
+            if (allRemoved) {
+              delete this.stockDetails[toDel.productName.toString()]
+            }
+          }
+          this.refreshDataSource();
           break;
       }
 
