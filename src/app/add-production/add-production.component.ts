@@ -21,7 +21,7 @@ export class AddProductionComponent implements OnInit {
 
   ngOnInit() {
     this.form = this._fb.group( 
-      {lotNumber:['',Validators.required],
+      {finalProductName:['',Validators.required],
       details:[''],
       products: this._fb.array([this.initProducts()]),
     });
@@ -51,7 +51,7 @@ control.removeAt(i);
   save() {
 
     let args = {};
-    args['lotNumber'] = this.form.get('lotNumber').value;    
+    args['finalProductName'] = this.form.get('finalProductName').value;    
     args['details'] = this.form.get('details').value;
 
     let productNames=[];
