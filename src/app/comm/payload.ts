@@ -9,6 +9,8 @@ export class Data {
   public static readonly OPERATION_SUPPLY = 200;
   public static readonly OPERATION_REQUEST = 300;
   public static readonly OPERATION_REPLY = 400;
+  public static readonly OPERATION_PING = 500;
+  public static readonly OPERATION_PONG = 501;
 
   protocolversion: number;
   operation: number;

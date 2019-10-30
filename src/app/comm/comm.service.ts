@@ -30,10 +30,11 @@ export class CommService {
           switch (data.operation) {
 
             case Data.OPERATION_LOGIN_RESULT:
-              console.log("uff");
+              
               if (data.sessionId) {
                 this.loginSesionData = data;
                 this.login_deferred.resolve(true);
+                this.installHeartbeat();
               } else {
                 this.login_deferred.reject(data.message);
               }
@@ -69,6 +70,22 @@ export class CommService {
 
 
     });
+  }
+  
+  private installHeartbeat() {
+    setTimeout((x) => {
+    if (!x.loginSesionData) console.log("Not logged in");
+
+    if (!x.ws.isConnected()) console.log("Not connected to server");
+
+    let data = new Data();
+    data.operation = Data.OPERATION_PING;
+    data.user = x.loginSesionData.user;
+    data.sessionId = x.loginSesionData.sessionId;
+
+    x.ws.send(data);
+    x.installHeartbeat();
+    }, 10000, this);
   }
 
   public login(userName: string, pwd: string): Promise<boolean> {
