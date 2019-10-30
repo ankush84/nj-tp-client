@@ -57,7 +57,7 @@
     
     <div fxLayout="column">
         <div formArrayName="products">
-            <div *ngFor="let product of form.controls.products.controls; let i=index">
+            <div *ngFor="let product of form.get('products')['controls']; let i=index">
                 <div fxLayout="row" fxLayoutGap="5px" [formGroupName]="i" style="max-height: 5em">
                     <div>
                         <mat-form-field>
@@ -74,7 +74,7 @@
                             <input type="number" min="0" style="text-align: right" matInput placeholder="Qty Waste" formControlName="qtyWaste">
                         </mat-form-field>
                     </div>
-                    <div *ngIf="form.controls.products.controls.length > 1" (click)="removeProduct(i)">                        
+                    <div *ngIf="form.get('products')['controls'].length > 1" (click)="removeProduct(i)">                        
                             <i class="material-icons pull-right">close</i>                        
                     </div>
                 </div>

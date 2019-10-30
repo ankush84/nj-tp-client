@@ -80,7 +80,7 @@ private productQtyArry:{name:string,qtyUsed:number,qtyWaste:number}[]=[];
     this.productQtyArry.splice(0,this.productQtyArry.length);
 
     
-    this.checkAndAdd('_dry401',"Dry 401");
+    this.checkAndAdd('_dry401',"DRY 401");
     this.checkAndAdd('_602',"602");
     this.checkAndAdd('_675',"675");
     this.checkAndAdd('_684',"684");
