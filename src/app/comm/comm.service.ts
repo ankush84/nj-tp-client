@@ -85,7 +85,7 @@ export class CommService {
 
     x.ws.send(data);
     x.installHeartbeat();
-    }, 10000, this);
+    }, 60000, this);
   }
 
   public login(userName: string, pwd: string): Promise<boolean> {
